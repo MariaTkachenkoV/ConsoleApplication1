@@ -1,10 +1,15 @@
-﻿// ConsoleApplication1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
+﻿
 #include <iostream>
+
 using namespace std;
-void print1D(int* a, int n) {
+void printArray(int* a, int n) {
 	for (int i = 0; i < n; i++) {
+		printf("%d ", a[i]);
+	}
+	printf("\n");
+}
+void print1D(int* a, int size) {
+	for (int i = 0; i < size; i++) {
 		cout << a[i] << " ";
 	}
 	cout << endl;
@@ -17,7 +22,7 @@ void print2D(int** a, int x, int y) {
 		cout << endl;
 	}
 }
-bool test1(int num) {
+bool testOne(int num) {
 	do {
 		int tmp = num % 10;
 		if (tmp == 1) {
@@ -40,20 +45,19 @@ int processArray(int a[], int b[])
 		if (i % 2 != 0) 
 		{
 			a[i] = y;
-			y = y * 3;
+			y *= 3;
 		}
 		if (i % 2 == 0) 
 		{
 			a[i] = x;
-			x = x * 2;
+			x *= 2;
 		}
-		if (test1(a[i]))
+		if (testOne(a[i]))
 		{
 			count++;
 		}
-		cout << a[i] << " ";
 	}
-	cout << endl;
+	printArray(a, 16);
 		int j = 0;
 		int tmp = 0;
 		for (int i = 0; i < 16; i++) 
@@ -68,9 +72,7 @@ int processArray(int a[], int b[])
 			a[i] = a[j];
 			a[j] = tmp;
 			b[i] = a[i];
-			cout << b[i] << " ";
 		}
-		cout << endl;
 	return count;
 }
 void makeArray(int* a,int n) 
@@ -110,6 +112,12 @@ void makeNew(int* a,int**b, int n)
 	}
 	print2D(b, 6, 3);
 }
+char* newStrncpy(char* S, const char* source, size_t num) {
+	for (int i = 0; i < num; i++) {
+		S[i] = source[i];
+	}
+	return S;
+}
 
 int main()
 {
@@ -119,11 +127,17 @@ int main()
 	switch (number)
 	{
 	case 1: {
-		int a[16] = { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 };
+		int a[16] = {};
+		for (int i = 0; i < 16; i++) {
+			a[i] = 1;
+		}
 		int b[16] = {};
 		int cnt = 0;
-		cnt = processArray(a,b);
-		cout << cnt << endl;
+		printf("First array:\n");
+		cnt = processArray(a,b);	
+		printf("Second array:\n");
+		printArray(b, 16);
+		printf("cnt = %d",cnt);
 			break;
 	}
 	case 2: {
@@ -138,19 +152,16 @@ int main()
 		makeArray(a, n);
 		makeNew(a, b, n);
 	}
+	case 3: {
+		char dest[50];
+		const char src[50] = { "Hello10000011World10000011" };
+		strncpy(dest, src, 10);
+		printf(dest);
+		newStrncpy(dest, src, 20);
+		printf("\n");
+		printf(dest);
+	}
 	 default:
 		break;
 	}
-	
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
