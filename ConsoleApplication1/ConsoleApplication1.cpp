@@ -1,5 +1,6 @@
 ﻿
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 void printArray(int* a, int n) {
@@ -17,7 +18,7 @@ void print1D(int* a, int size) {
 void print2D(int** a, int x, int y) {
 	for (int i = 0; i < x; i++) {
 		for (int j = 0; j < y; j++) {
-			cout << a[i][j] << "     ";
+			cout << a[i][j] << setw(5);
 		}
 		cout << endl;
 	}
@@ -121,6 +122,8 @@ char* newStrncpy(char* S, const char* source, size_t num) {
 
 int main()
 {
+	Point:
+	system("cls");
 	cout << "Select number from 1-3" << endl;
 	int number = 0;
 	cin >> number;
@@ -138,7 +141,11 @@ int main()
 		printf("Second array:\n");
 		printArray(b, 16);
 		printf("cnt = %d",cnt);
-			break;
+		cin.get(); cin.get();
+		goto Point;
+		//первое задание: массив из n=16 целых чисел,
+		//processArray() должна заполнить элементы массива с четными индексами степенями двойки, с нечетными индексами – степенями тройки
+		//cnt – количество чисел в массиве, и отсортировать
 	}
 	case 2: {
 		cout << "Enter arrays lenght\n";
@@ -151,6 +158,11 @@ int main()
 		}
 		makeArray(a, n);
 		makeNew(a, b, n);
+		cin.get(); cin.get();
+		goto Point;
+		//Преобразование: 1D → 2D
+		//Инициализация: заполнить массив числами x[i] = i2 – 1 и все элементы с нечетными индексами домножить на –1.
+		//Вывод на экран: на каждый элемент массива отвести 5 позиций.
 	}
 	case 3: {
 		char dest[50];
@@ -160,6 +172,10 @@ int main()
 		newStrncpy(dest, src, 20);
 		printf("\n");
 		printf(dest);
+		cin.get(); cin.get();
+		goto Point;
+		//Функция strncpy
+		//Функция копирует первые num символов из строки src в строку dest.
 	}
 	 default:
 		break;
